@@ -1,0 +1,102 @@
+{%extends 'base.html'%}
+{%block head%}<title>Home Page</title>{%endblock%}
+{%block body%}
+
+<style>
+
+    .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #374785;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #0b5de2;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+#main {
+   transition: margin-left .5s;
+  padding: 16px;
+}
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0b5de2;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #0b387f}
+
+.button:active {
+  background-color: #0b387f;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+</style>
+
+
+<div id="main">
+        <div class="container">
+<form class="form-horizontal" method="POST">
+        {% csrf_token %}
+       <div class="form-group">
+    <br><br><br><br>
+  <label class="control-label col-sm-2" for="Location" style="font-size:20px">Location:</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="Location" placeholder="Location Where You Left It"name="Location" style="font-size: 18px"  />
+      <br><br>
+  </div>
+   <input type="hidden" name="ItemID" value="{{ item.ItemID }}" />
+   <div class="container" align="center">
+    <input type="Submit" id="Submit" name="Submit" value="Submit" class="button"/><br><br>
+    </div>
+
+</div>
+{%if post %}
+    {% if status%}
+    <script>
+        alert('Claim Accepted')
+    </script>
+    {%else%}
+    <script>
+        alert('Claim Rejected, Please Try later')
+    </script>
+    {%endif%}
+{%endif%}
+</form>
+
+    </div>
+</div>
+{%endblock%}

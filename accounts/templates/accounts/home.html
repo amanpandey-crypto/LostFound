@@ -1,0 +1,88 @@
+{%extends 'base.html'%}
+
+{% block head %}<title>Lost And Found</title>
+{%endblock%}
+<style>
+
+</style>
+
+{% block body %}
+{% if message_name %}
+<center>
+       <h3>Thanks {{message_name}}</h3>
+       <p>We recieved your mail and will definitely look forward to this..</p>
+</center>
+{% endif %}
+
+<div class="container-fluid" style="margin-top:2rem;">
+       <h2 class="text-center">Welcome to our Website</h2> 
+       <br/>
+       <div class="container">
+              <div class="text-center">
+                     <img src="https://us.123rf.com/450wm/artursz/artursz1808/artursz180802982/106481176-word-writing-text-lost-found-business-concept-for-things-that-are-left-behind-and-may-retrieve-to-th.jpg?ver=6" class="img-fluid" alt="...">
+              </div>
+              <br>
+              <p class="text-center" style="color:rgb(58, 2, 104)"><b>
+                     We are student of Smart manufacturing branch at IIIT D&M, Kancheepuram. Our group consist of four members:<br>Aman Pandey(MSM19B040),
+                     Manish Kumar(MSM19B037), Prajjwal Soni(MSM19B043), Shubham Kumar(MSM19B044).<br> <br>If you Lost Something or Found Something, Post Here.<br>We are here for you. 
+                     </b>
+              </p>
+              
+       </div>
+       <br/>
+       <div class="text-center">
+              
+              
+              <button type="submit" class="btn btn-primary"><a href="#contact"><span style="color:white;">Contact Us</span></a></button>
+              {%if request.user.is_authenticated %}
+              {% else %}
+              <button type="submit" class="btn btn-primary"><a href="{% url 'register' %}"><span style="color:white;">Join Us</span></a></button>
+              {% endif %}
+      </div>
+</div>
+
+
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<div class="container">
+       <h2 class="text-center" style="text-decoration: underline;" id="contact">Get in Touch</h2> 
+       <br/>
+       <p class="text-center" style="color: rgb(58, 2, 104);">If you have any advice about changes or want to report some bugs or want to give feedback, Please fill free to reach us.<br>We will be waiting for your feedback.</p>
+       <br/>
+       <br/>
+       <div class="row">
+              <div class="col-md-6 text-center" style="height: 18rem; width: 35rem; background-color: antiquewhite;  padding: 1rem; border-radius: 1.5rem;">
+                     <h3><i class="fas fa-map-marker-alt"></i><br></h3><h5>IIIT D&M, Chennai, Tamil Nadu-600127</h5><br/>
+                     <h3><i class="far fa-envelope"></i><br></h3><h5>lostfoundiiitdm@gmail.com</h5><br/>
+                     <h3><i class="fab fa-twitter"></i><br></h3><a href="https://mobile.twitter.com/LostFou77537685" class="link-danger"><h5>LostFound</h5></a>
+              </div>
+              <div class="col-md-6" >
+                     <form action="{% url 'contact' %}" method="POST" style="background-color: rgb(59, 59, 59); padding: 2rem; border-radius: 1.5rem;" >
+                            {% csrf_token %}
+                            <div class="form-group">
+                              <label for="name"><span style="color: rgb(250, 56, 56);">Full Name</span></label>
+                              <input name="message_name" type="text" class="form-control" id="name"  placeholder="Enter your name" >
+                            </div>
+                            <div class="form-group">
+                                   <label for="email"><span style="color: rgb(250, 56, 56);">Email Id</span></label>
+                                   <input name="message_email" type="email" class="form-control" id="email"  placeholder="Enter your email id">
+                                 </div>
+                            <div class="form-group">
+                              <label for="message"><span style="color: rgb(250, 56, 56);">Message</span></label>
+                              <textarea name="message" class="form-control" id="message" rows="4" placeholder="Enter your message here"></textarea>
+                            </div>
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Send message</button>
+                          </form>  
+              </div>
+              
+       </div> 
+
+</div>
+   <br/><br/>  
+<div class="text-center">
+       <p>Designed & Tested by <span class="footer-line-1"> <a href="http://dbms-groupb.netlify.app/" class="link-danger" ><b>Group B</b></a></spam></p>
+</div>
+     <!-- Footer -->
+{%endblock%}

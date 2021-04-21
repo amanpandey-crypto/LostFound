@@ -1,0 +1,27 @@
+{%extends 'base.html'%} {% block head %}
+<title>Resolved</title> {%endblock%} 
+{% block body %}
+<!-- upload images code  -->
+<div class="container-fluid" style="padding: 2rem;">
+    {% for i in item_data %} {% if forloop.counter0|divisibleby:3 %}
+    <div class="row text-center"> {% endif %}
+        <div class="col-md-6">
+            <div
+                class="card row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">{{i.author}}</strong>
+                    <h5 class="mb-0"><label style="font-weight:800" for=""></label></h5>
+                    <h6 class="mb-1 "><label style="font-weight: 600;" for="">Found Date : </label>{{i.Find_Date}}</h6>
+                    <p class="card-text mb-auto"><label style="font-weight: 600;" for="">Details : </label>{{i.Description}}
+                    </p>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img class="img-card-top mx-auto" src="{{i.item_image}}" alt="{{i.ItemID}}" width="300px" height="200px">
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}</div>
+    <!-- row closing -->
+    <hr>{% endif %} {% endfor %}
+</div>
+{%endblock%}

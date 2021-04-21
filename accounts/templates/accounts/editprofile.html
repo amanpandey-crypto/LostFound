@@ -1,0 +1,41 @@
+{%extends 'base.html'%} {%block head%}
+<title>Edit Profile Page</title>{%endblock%} {%block body%}
+<h2 style="color:black; margin:2rem;" align="center" >Edit Profile</h2>
+<div class="container text-center" style=" display:flex; align-items: center; justify-content: center;">
+    
+    <section style="background: #13232f;
+    min-height: 55vh;
+    width: 40%;
+    border-radius: 2rem;
+    display: flex;
+    align-items:center;
+    justify-content: center;">
+    
+    
+        <form method="post">
+            {% csrf_token %}
+            <table align='center'>
+                {% for field in form %}
+                <tr>
+                    {% if field.name != 'password'%}
+                    <td style="color:white;">{{ field.label_tag }}</td>
+                    <td>{{ field }}</td>
+
+                    {% for error in field.errors %}
+                    <p style="color: white;">{{ error }}</p>
+                    {% endfor %} {% else %}
+                    <td style="color: white;">Password:</td>
+                    <td style="color: white;"><a href="{%url 'change_password'%}">Click here </a> to change password</td>
+                    {%endif%}
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br/>
+            <button type="submit" class="btn btn-success">Update Profile</button>
+        </form>
+    </section>
+</div>
+{%endblock%}

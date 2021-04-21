@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{%block head%}
+<title>Lost form</title>
+{%endblock%}
+{%block body%}
+<div class="container">
+  <div class="container" align="center"> <b>
+<p style="font-size: 35px">Lost form</p></b>
+  </div>
+  <form class="row g-3" method="POST">
+      {% csrf_token %}
+      <div class="col-md-6">
+          <label for="author" class="form-label">Author</label>
+          <input type="text" class="form-control" id="author" placeholder="Your Name..." name="author">
+        </div>
+      
+      <div class="col-12">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" placeholder="Description Of The Item" name="Description">
+      </div>
+      <div class="col-12">
+        <label for="lost_image" class="form-label">Item Image URL</label>
+        <input type="text" class="form-control" id="lost_image" placeholder="URL link of the lost item" name="lost_image">
+      </div>
+
+      <div class="col-12">
+        <button type="Submit" id="Submit" name="Submit" value="Submit" class="btn btn-danger">Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{%endblock%}
