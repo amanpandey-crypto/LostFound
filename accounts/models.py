@@ -31,7 +31,7 @@ class ItemData(models.Model):
 
 
 class LostItem(models.Model):
-    id = models.AutoField(primary_key=True)
+    lostitemID = models.AutoField(primary_key=True)
     UserID = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     lost_image = models.URLField(null=True)
     title = models.CharField(max_length=2000)

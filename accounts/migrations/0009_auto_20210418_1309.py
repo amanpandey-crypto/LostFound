@@ -20,5 +20,4 @@ class Migration(migrations.Migration):
             name='lostitemID',
             field=models.AutoField(default=0, primary_key=True, serialize=False),
         ),
-
     ]
