@@ -7,7 +7,6 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.core.mail import send_mail
-# Create your views here.
 
 
 def home(request):
@@ -27,7 +26,6 @@ def register(request):
                                year=request.POST.get('Year'), contactno=request.POST.get('ContactNo'), 
                                user_image=request.POST.get('user_image'), designation=request.POST.get('designation'))
 
-            print(objt)
 
             objt.save()
             return redirect('login')
@@ -77,7 +75,6 @@ def editprofile(request):
             user_obj.save()
             return redirect('profile')
         else:
-            print('not saved')
             return redirect('home')
     else:
         form = EditProfileForm(instance=request.user)
@@ -104,15 +101,12 @@ def change_password(request):
 def claim(request, id):
     item = ItemData.objects.get(pk=id)
     email= item.UserID.email
-    print(email)
     status = False
     post1 = False
     if request.method == 'POST':
         location_claim = request.POST.get('Location').lower()
-        print(location_claim)
         item_object = ItemData.objects.get(pk = request.POST.get('ItemID'))
         location_act = item_object.Location.lower()
-        print(location_act)
         post1 = True
         if location_claim == location_act:
             status = True
@@ -137,8 +131,6 @@ def found(request):
 
 
 def requestItem(request):
-    print(request.user.id)
-
     submitButton = request.POST.get('Submit')
     if submitButton == 'Submit':
         obj = ItemData(UserID=request.user, author=request.POST.get('author'),
@@ -159,8 +151,6 @@ def lost(request):
 
 
 def lostItem(request):
-    print(request.user.id)
-
     submitButton = request.POST.get('Submit')
     if submitButton == 'Submit':
         obj = LostItem(UserID=request.user, author=request.POST.get('author'),
