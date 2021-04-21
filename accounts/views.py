@@ -203,7 +203,7 @@ def contact(request):
             'Feedback from' +' ' + message_name,
             message,
             message_email,
-            ['pandeysangeeta824@gmail.com'],
+            ['lostfoundiiitdm@gmail.com'],
             fail_silently=False,
         )
         return render(request, 'accounts/home.html', {'message_name': message_name})
