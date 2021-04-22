@@ -9,16 +9,15 @@
   </div>
   <form class="row g-3" method="POST">
       {% csrf_token %}
-      <div class="col-md-6">
-          <label for="author" class="form-label">Author</label>
-          <input type="text" class="form-control" id="author" placeholder="Your Name..." name="author">
-        </div>
-      
-      <div class="col-12">
+      <div class="col-4">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Item type" name="title">
+      </div>
+      <div class="col-8">
         <label for="description" class="form-label">Description</label>
         <input type="text" class="form-control" id="description" placeholder="Description Of The Item" name="Description">
       </div>
-      <div class="col-12">
+      <div class="col-8">
         <label for="lost_image" class="form-label">Item Image URL</label>
         <input type="text" class="form-control" id="lost_image" placeholder="URL link of the lost item" name="lost_image">
       </div>
@@ -27,7 +26,6 @@
         <button type="Submit" id="Submit" name="Submit" value="Submit" class="btn btn-danger">Post</button>
       </div>
     </form>
-  </div>
 </div>
 
 {%endblock%}
