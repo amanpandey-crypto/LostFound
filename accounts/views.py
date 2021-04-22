@@ -104,13 +104,13 @@ def claim(request, id):
     UID = item.UID
     location = item.Location
 
-    #send_mail(
-    #    'Trying to claim',
-    #    f'Someone wants to claim the item(maybe owner) {request.user.email}',
-    #    'lostfoundiiitdm@gmail.com',
-    #    [email],
-    #    fail_silently=False,
-    #)
+    send_mail(
+        'Trying to claim',
+        f'Someone wants to claim the item(maybe owner) {request.user.email}',
+        'lostfoundiiitdm@gmail.com',
+        [email],
+        fail_silently=False,
+    )
     item.active = False
     messages.success(request, 'Mail has been sent to ' + username)
     item.save()
