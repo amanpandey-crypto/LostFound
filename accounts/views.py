@@ -162,19 +162,22 @@ def lostItem(request):
 
 def mail(request, id):
     obj = LostItem.objects.get(pk=id)
-    email= obj.UserID.email
+    email = obj.UserID.email
+    first = obj.UserID.first_name
+    last = obj.UserID.last_name
+    username = obj.UserID.username
+    description = obj.description
     obj.active=False
     
     send_mail(
-        'Item has been found',
-        f'the item found by {request.user.email}',
-        'pandeyaman879@gmail.com',
+        'Item found',
+        'lostfoundiiitdm@gmail.com',
+        f'the item has been found by {request.user.email}',
         [email],
         fail_silently=False,
     )
     obj.save()
-    return redirect('home')
-
+    return render(request, 'accounts/postuser.html',{'email': email, 'first': first, 'last': last, 'username': username, 'description':description})
 
 def resfound(request):
     item_data = ItemData.objects.filter(active=False)
