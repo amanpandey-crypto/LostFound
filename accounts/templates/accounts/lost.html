@@ -6,7 +6,7 @@
 <!-- upload images code  -->
 <div class="container" style="margin-top: 1rem;">
   {% for i in lost %}
-  {% if forloop.counter0|divisibleby:3 %} <div class="row text-center"> {% endif %}
+  {% if forloop.counter0|divisibleby:4 %} <div class="row text-center"> {% endif %}
     <div class="col-md-6">
                 <div
                     class="card row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-    {% if forloop.counter|divisibleby:3 or forloop.last %}</div><!-- row closing -->
+    {% if forloop.counter|divisibleby:4 or forloop.last %}</div><!-- row closing -->
   <hr>{% endif %}
   {% endfor %}
 </div>
