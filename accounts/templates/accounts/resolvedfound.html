@@ -3,7 +3,7 @@
 {% block body %}
 <!-- upload images code  -->
 <div class="container-fluid" style="padding: 2rem;">
-    {% for i in item_data %} {% if forloop.counter0|divisibleby:3 %}
+    {% for i in item_data %} {% if forloop.counter0|divisibleby:4 %}
     <div class="row text-center"> {% endif %}
         <div class="col-md-6">
             <div
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        {% if forloop.counter|divisibleby:3 or forloop.last %}</div>
+        {% if forloop.counter|divisibleby:4 or forloop.last %}</div>
     <!-- row closing -->
     <hr>{% endif %} {% endfor %}
 </div>
