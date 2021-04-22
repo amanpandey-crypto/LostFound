@@ -101,7 +101,6 @@ def claim(request, id):
     last = item.UserID.last_name
     username = item.UserID.username
     description = item.Description
-    UID = item.UID
     location = item.Location
 
     send_mail(
@@ -116,7 +115,7 @@ def claim(request, id):
     item.save()
     return render(request, 'accounts/claim.html', {'email': email, 'first': first,
                                                    'last': last, 'username': username, 'description':description,
-                                                   'UID': UID, 'location':location})
+                                                    'location':location})
 
 
 def found(request):
