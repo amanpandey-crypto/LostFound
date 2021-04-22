@@ -7,6 +7,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.core.mail import send_mail
+# Create your views here.
 
 
 def home(request):
@@ -26,6 +27,7 @@ def register(request):
                                year=request.POST.get('Year'), contactno=request.POST.get('ContactNo'), 
                                user_image=request.POST.get('user_image'), designation=request.POST.get('designation'))
 
+            print(objt)
 
             objt.save()
             return redirect('login')
@@ -54,13 +56,6 @@ def logoutUser(request):
     return redirect('login')
 
 
-def profile(request):
-    obj = UserProfile.objects.get(user_id=request.user.id)
-    args = {'UID': obj.UID, 'contactno': obj.contactno, 'branch': obj.branch, 'year': obj.year, 
-    'designation':obj.designation, 'image': obj.user_image}
-    return render(request, 'accounts/profile.html', args)
-
-
 def editprofile(request):
 
     if request.method == 'POST':
@@ -75,6 +70,7 @@ def editprofile(request):
             user_obj.save()
             return redirect('profile')
         else:
+            print('not saved')
             return redirect('home')
     else:
         form = EditProfileForm(instance=request.user)
@@ -100,26 +96,27 @@ def change_password(request):
 
 def claim(request, id):
     item = ItemData.objects.get(pk=id)
-    email= item.UserID.email
-    status = False
-    post1 = False
-    if request.method == 'POST':
-        location_claim = request.POST.get('Location').lower()
-        item_object = ItemData.objects.get(pk = request.POST.get('ItemID'))
-        location_act = item_object.Location.lower()
-        post1 = True
-        if location_claim == location_act:
-            status = True
-            item.active=False
-            send_mail(
-                'Item has been claimed',
-                f'the item claimed by {request.user.email}',
-                'pandeyaman879@gmail.com',
-                [email],
-                fail_silently=False,
-            )
-            item.save()
-    return render(request, 'accounts/claim.html', {'item': item, 'status': status, 'post': post1})
+    email = item.UserID.email
+    first = item.UserID.first_name
+    last = item.UserID.last_name
+    username = item.UserID.username
+    description = item.Description
+    UID = item.UID
+    location = item.Location
+
+    #send_mail(
+    #    'Trying to claim',
+    #    f'Someone wants to claim the item(maybe owner) {request.user.email}',
+    #    'lostfoundiiitdm@gmail.com',
+    #    [email],
+    #    fail_silently=False,
+    #)
+    item.active = False
+    messages.success(request, 'Mail has been sent to ' + username)
+    item.save()
+    return render(request, 'accounts/claim.html', {'email': email, 'first': first,
+                                                   'last': last, 'username': username, 'description':description,
+                                                   'UID': UID, 'location':location})
 
 
 def found(request):
@@ -131,6 +128,8 @@ def found(request):
 
 
 def requestItem(request):
+    print(request.user.id)
+
     submitButton = request.POST.get('Submit')
     if submitButton == 'Submit':
         obj = ItemData(UserID=request.user, author=request.POST.get('author'),
@@ -151,6 +150,8 @@ def lost(request):
 
 
 def lostItem(request):
+    print(request.user.id)
+
     submitButton = request.POST.get('Submit')
     if submitButton == 'Submit':
         obj = LostItem(UserID=request.user, author=request.POST.get('author'),
@@ -158,6 +159,14 @@ def lostItem(request):
                        lost_image=request.POST.get('lost_image'))
         obj.save()
     return render(request, 'accounts/postitem.html')
+
+
+
+def profile(request):
+    obj = UserProfile.objects.get(user_id=request.user.id)
+    args = {'UID': obj.UID, 'contactno': obj.contactno, 'branch': obj.branch, 'year': obj.year,
+    'designation':obj.designation, 'image': obj.user_image}
+    return render(request, 'accounts/profile.html', args)
 
 
 def mail(request, id):
@@ -171,13 +180,16 @@ def mail(request, id):
     
     send_mail(
         'Item found',
-        'lostfoundiiitdm@gmail.com',
         f'the item has been found by {request.user.email}',
+        'lostfoundiiitdm@gmail.com',
         [email],
         fail_silently=False,
     )
     obj.save()
-    return render(request, 'accounts/postuser.html',{'email': email, 'first': first, 'last': last, 'username': username, 'description':description})
+    messages.success(request, 'Mail has been sent to ' + username)
+    return render(request, 'accounts/postuser.html',{'email': email, 'first': first,
+                                                     'last': last, 'username': username, 'description':description})
+
 
 def resfound(request):
     item_data = ItemData.objects.filter(active=False)
@@ -206,7 +218,7 @@ def contact(request):
             'Feedback from' +' ' + message_name,
             message,
             message_email,
-            ['lostfoundiiitdm@gmail.com'],
+            ['pandeysangeeta824@gmail.com'],
             fail_silently=False,
         )
         return render(request, 'accounts/home.html', {'message_name': message_name})
