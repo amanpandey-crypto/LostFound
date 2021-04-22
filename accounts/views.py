@@ -128,16 +128,15 @@ def found(request):
 
 
 def requestItem(request):
-    print(request.user.id)
 
     submitButton = request.POST.get('Submit')
     if submitButton == 'Submit':
-        obj = ItemData(UserID=request.user, author=request.POST.get('author'),
-            UID=request.POST.get('UID'),
+        obj = ItemData(UserID=request.user, author=request.user.username,
                        Description=request.POST.get('Description'),
                        Location=request.POST.get('Location'),
                        item_image=request.POST.get('item_image'))
         obj.save()
+        return redirect('found')
     return render(request, 'accounts/requestitem.html')
 
 
@@ -150,14 +149,15 @@ def lost(request):
 
 
 def lostItem(request):
-    print(request.user.id)
 
     submitButton = request.POST.get('Submit')
     if submitButton == 'Submit':
-        obj = LostItem(UserID=request.user, author=request.POST.get('author'),
-            description=request.POST.get('Description'),
+        obj = LostItem(UserID=request.user, author=request.user.username,
+                       title=request.POST.get('title'), description=request.POST.get('Description'),
                        lost_image=request.POST.get('lost_image'))
+
         obj.save()
+        return redirect('lost')
     return render(request, 'accounts/postitem.html')
 
 
