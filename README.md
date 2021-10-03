@@ -1,6 +1,6 @@
 # LostFound
 LostFound Web app made using Django python framework
-Used Bootstrap 5 beta version for importing css design
+Used Bootstrap 5 beta version for importing css design.Used for reporting Lost items so that they can be searched and can get it back from those who found it.
 
 
 **Local Setup**
