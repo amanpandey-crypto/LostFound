@@ -1,9 +1,9 @@
 # LostFound
-Use of this Web app:
+Use of this Web app: <br>
 a) When a user finds an item, he or she can post about
 it, allowing the owner to contact the finder and
-reclaim his or her item.
-b) It has a user login and registration feature
+reclaim his or her item.<br>
+b) It has a user login and registration feature.<br>
 c) Django Framework is used for back‐end (server-side)
        
 Used Bootstrap for importing css design and javascript for making it responsive.
