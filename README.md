@@ -7,6 +7,7 @@ b) It has a user login and registration feature.<br>
 c) Django Framework is used for back‐end (server-side)
        
 Used Bootstrap for importing css design and javascript for making it responsive.
+Hello!
 
 
 **Local Setup**
